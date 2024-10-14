@@ -1,6 +1,6 @@
-import User from "../models/userModel.js";
-import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
+import asyncHandler from "../middlewares/asyncHandler.js";
+import User from "../models/userModel.js";
 import createToken from "../utils/createToken.js";
 
 const createUser = asyncHandler(async (req, res) => {
@@ -25,14 +25,15 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user && (await bcrypt.compare(password, user.password))) {
-  
+
     createToken(res, user._id);
     return res.status(200).json({ _id: user._id, username: user.username, email: user.email });
   }
   res.status(401).send("Invalid credentials");
 });
 
-const logoutCurrentUser = asyncHandler((req, res) => {console.log('clear cookie');
+const logoutCurrentUser = asyncHandler((req, res) => {
+  console.log('clear cookie');
 
   res.cookie("jwt", "", {
     httyOnly: true,
@@ -49,4 +50,5 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
   res.status(404).send("User not found");
 });
 
-export { createUser, loginUser, logoutCurrentUser, getCurrentUserProfile };
+export { createUser, getCurrentUserProfile, loginUser, logoutCurrentUser };
+
