@@ -6,6 +6,7 @@ const protect = async (req, res, next) => {
 
   // Read JWT from the 'jwt' cookie
   token = req.cookies.jwt;
+  console.log(token);
 
   if (token) {
     try {
@@ -14,11 +15,11 @@ const protect = async (req, res, next) => {
       next();
     } catch (error) {
       res.status(401);
-      throw new Error("Not authorized, token failed.");
+      throw new Error("Not authorized, token failed.!");
     }
   } else {
     res.status(401);
-    throw new Error("Not authorized, no token.");
+    throw new Error("Not authorized, no token.!");
   }
 };
 

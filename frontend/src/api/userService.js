@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/users";
+const API_URL = "https://jwt-authentication-in-mern.onrender.com/api/users";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
@@ -43,7 +43,9 @@ const logoutUser = async () => {
 // Get user profile
 const getUserProfile = async () => {
   try {
-    const response = await axiosInstance.get("/profile");
+    const response = await axios.get('https://jwt-authentication-in-mern.onrender.com/api/users/profile', {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.error("Fetch profile error:", error.response?.data || error.message);
