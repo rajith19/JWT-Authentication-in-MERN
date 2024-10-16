@@ -18,6 +18,23 @@ app.use(cors({
   credentials: true // Allow credentials (cookies, authorization headers)
 }));
 
+// Add additional headers to handle CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://jwtmern.netlify.app");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
+// Handle Preflight requests
+app.options('*', cors({
+  origin: 'https://jwtmern.netlify.app',
+  credentials: true
+}));
+
+
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
