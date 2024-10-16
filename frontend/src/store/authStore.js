@@ -11,7 +11,7 @@ const useAuthStore = create(
     // Action to clear user data
     logout: async () => {
       try {
-        await fetch('http://localhost:5000/api/users/logout', {
+        await fetch('https://jwt-authentication-in-mern.onrender.com/api/users/logout', {
           method: 'POST',
           credentials: 'include', // Include cookies for logout
         });
