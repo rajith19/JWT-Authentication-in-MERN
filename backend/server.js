@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // Use CORS Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from your frontend origin
+  origin: 'https://jwtmern.netlify.app/', // Allow requests from your frontend origin
   credentials: true // Allow credentials (cookies, authorization headers)
 }));
 
